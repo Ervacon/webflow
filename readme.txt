@@ -1,4 +1,6 @@
-# SPRING WEB FLOW
+SPRING WEB FLOW READ ME
+-----------------------
+
 The Spring Web Flow library provides web flow functionality for the Spring framework.
 A web flow captures the page flow in (part of) a web application using a simple XML
 definition.

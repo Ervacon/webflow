@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-flow PUBLIC "-//ERVACON//DTD SPRING WEB FLOW//EN" "http://www.ervacon.com/dtd/web-flow.dtd">
+
+<web-flow name="Search Flow">
+
+	<start-state state="criteria"/>
+
+	<view-state id="criteria" view="criteria">
+		<transition name="search" to="bindAndValidateCriteria"/>
+	</view-state>
+
+	<action-state id="bindAndValidateCriteria">
+		<action name="bindAndValidateAct" bean="bindAndValidateCriteriaAction"/>
+		<transition name="bindAndValidateAct.ok" to="search"/>
+		<transition name="bindAndValidateAct.error" to="criteria"/>
+	</action-state>
+	
+	<action-state id="search">
+		<action name="searchAct" bean="queryAction"/>
+		<transition name="searchAct.ok" to="results"/>
+	</action-state>
+	
+	<view-state id="results" view="results">
+		<transition name="newSearch" to="criteria"/>
+		<transition name="detail" to="bindAndValidateId"/>
+	</view-state>
+
+	<action-state id="bindAndValidateId">
+		<action name="bindAndValidateAct" bean="bindAndValidateIdAction"/>
+		<transition name="bindAndValidateAct.ok" to="detail"/>
+		<transition name="bindAndValidateAct.error" to="endError"/>
+	</action-state>
+	
+	<flow-state id="detail" flow="detailFlow" model-mapper="idMapper">
+		<transition name="endOk" to="results"/>
+		<transition name="endError" to="endError"/>
+	</flow-state>
+	
+	<end-state id="endError" view="error"/>
+	
+</web-flow>

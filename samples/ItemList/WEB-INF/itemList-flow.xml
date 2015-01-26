@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-flow PUBLIC "-//ERVACON//DTD SPRING WEB FLOW//EN" "http://www.ervacon.com/dtd/web-flow.dtd">
+
+<web-flow name="Item List Flow">
+
+	<start-state state="list"/>
+
+	<view-state id="list" view="list">
+		<transition name="new" to="newItem"/>
+	</view-state>
+
+	<action-state id="newItem">
+		<action name="newItemAct" bean="newItemAction"/>
+		<transition name="newItemAct.ok" to="item"/>
+	</action-state>
+	
+	<view-state id="item" view="item">
+		<transition name="add" to="addItem"/>
+	</view-state>
+	
+	<action-state id="addItem">
+		<action name="addItemAct" bean="addItemAction"/>
+		<transition name="addItemAct.ok" to="list"/>
+		<transition name="addItemAct.tokenError" to="list"/>
+	</action-state>
+	
+	<end-state id="endError" view="error"/>
+	
+</web-flow>

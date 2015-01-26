@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+
+<!--
+	Project Object Model (POM) definition for Spring Web Flow.
+	
+	@author Erwin Vervaet
+-->
+<project>
+	<!-- the version of maven's project object model -->
+	<pomVersion>3</pomVersion>
+	
+	<!-- a unique name for this project -->
+	<id>webflow</id>
+	<!-- a short but descriptive name for the project -->
+	<name>Spring Web Flow</name>
+	<!-- short name of the project group -->
+	<groupId>ervacon</groupId>
+	
+	<!-- The version of the project under development, e.g. 1.1, 1.2, 2.0-SNAPSHOT -->
+	<currentVersion>1.0.0</currentVersion>
+	
+	<!-- details about the organization that 'owns' the project -->
+	<organization>
+		<name>Ervacon</name>
+		<url>http://www.ervacon.com</url>
+		<logo>http://www.ervacon.com/images/logo.gif</logo>
+	</organization>
+	
+	<!-- the year the project started -->
+	<inceptionYear>2004</inceptionYear>
+	
+	<!-- the Java package name of the project -->
+	<package>com.ervacon.springframework.web.servlet.mvc.webflow</package>
+	
+	<!-- a description of what the project does -->
+	<description>
+		This library provides web flow functionality for the Spring framework. A web flow
+		captures the page flow in (part of) a web application using a simple XML definition. 
+	</description>
+	<shortDescription>Spring Web Flow</shortDescription>
+	
+	<!-- the url of the project's home page -->
+	<url>http://www.ervacon.com/products/springwebflow</url>
+	
+	<!-- who the developers are for the project -->
+	<developers>
+		<developer>
+			<name>Erwin Vervaet</name>
+			<id>erwin</id>
+			<email>erwin@ervacon.com</email>
+			<organization>Ervacon</organization>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
+	
+	<licenses>
+		<license>
+			<name>BSD</name>
+			<url>http://www.ervacon.com/products/springwebflow/license.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<!-- jar files the project is dependent on -->
+	<dependencies>
+		<dependency>
+			<groupId>springframework</groupId>
+			<artifactId>spring</artifactId>
+			<version>1.1.3</version>
+			<url>http://www.springframework.org/</url>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.0.4</version>
+			<url>http://jakarta.apache.org/commons/logging/</url>
+		</dependency>
+		<dependency>
+			<groupId>servletapi</groupId>
+			<artifactId>servletapi</artifactId>
+			<version>2.3</version>
+			<url>http://java.sun.com/products/servlet/</url>
+		</dependency>
+		<dependency>
+			<groupId>jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.0</version>
+			<url>http://www.jdom.org/</url>
+		</dependency>
+	</dependencies>
+
+	<!-- build information for the project -->
+	<build>
+	    <nagEmailAddress/>
+
+		<sourceDirectory>src</sourceDirectory>
+		
+		<sourceModifications>
+		</sourceModifications>
+
+		<unitTestSourceDirectory>test</unitTestSourceDirectory>
+
+	    <aspectSourceDirectory/>
+
+		<unitTest>
+			<includes>
+				<include>**/*Test.java</include>
+			</includes>
+			<excludes>
+			</excludes>
+			<resources>
+				<resource>
+					<directory>test</directory>
+					<includes>
+						<include>**/*</include>
+					</includes>
+					<excludes>
+						<exclude>**/*.java</exclude>
+					</excludes>
+				</resource>
+			</resources>
+		</unitTest>
+              
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+					<exclude>**/package.html</exclude>
+				</excludes>
+			</resource>
+		</resources>
+	</build>
+</project>

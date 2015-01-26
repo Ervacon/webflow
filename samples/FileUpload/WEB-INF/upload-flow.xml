@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-flow PUBLIC "-//ERVACON//DTD SPRING WEB FLOW//EN" "http://www.ervacon.com/dtd/web-flow.dtd">
+
+<web-flow name="File Upload Flow">
+
+	<start-state state="select"/>
+
+	<view-state id="select" view="select">
+		<transition name="upload" to="processUpload"/>
+	</view-state>
+
+	<action-state id="processUpload">
+		<action name="processUploadAct" bean="processUploadAction"/>
+		<transition name="processUploadAct.ok" to="confirmation"/>
+		<transition name="processUploadAct.error" to="select"/>
+	</action-state>
+	
+	<view-state id="confirmation" view="confirmation">
+		<transition name="back" to="select"/>
+	</view-state>
+	
+</web-flow>

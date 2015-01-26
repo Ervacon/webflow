@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix"><value>/WEB-INF/jsp/</value></property>
+		<property name="suffix"><value>.jsp</value></property>
+	</bean>
+
+	<bean id="itemList" name="/il" class="com.ervacon.springframework.web.servlet.mvc.webflow.WebFlowController">
+		<property name="synchronizeOnSession"><value>true</value></property> <!-- serialize all operations within a session -->
+		<property name="webFlowName"><idref local="itemListFlow"/></property>
+	</bean>
+	
+	<bean id="itemListFlow" class="com.ervacon.springframework.web.servlet.mvc.webflow.SimpleWebFlow">
+		<property name="webFlowResource"><value>/WEB-INF/itemList-flow.xml</value></property>
+	</bean>
+	
+	<bean id="addItemAction" class="com.ervacon.springframework.samples.itemlist.web.AddItemAction"/>
+	
+	<bean id="newItemAction" class="com.ervacon.springframework.samples.itemlist.web.NewItemAction"/>
+	
+</beans>

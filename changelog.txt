@@ -1,0 +1,83 @@
+SPRING WEB FLOW CHANGE LOG
+--------------------------
+
+Version 1.0.0 (28/12/2005)
+--------------------------
+* Minor code cleanup & bug fixing.
+* The "cacheSeconds" property now defaults to 0 for the WebFlowController.
+
+Version 0.9.0 (17/03/2005)
+--------------------------
+* Jar file manifest now specifies version number.
+* License is now included in META-INF directory of jar file.
+* Added getModelInputData() method to WebFlowController.
+* Added Action.OK and Action.ERROR constants that define the very common "ok" and "error" events
+  signaled by Action implementations.
+* Added WebFlowUtils.getWebFlowMementoStack() method to get the web flow memento stack from
+  the request.
+* Added MultiAction: an action that allows you to bundle many actions into a single action
+  implementation class.
+* Added SignalEventAction: an action that takes a String value from the model and signals
+  it as an action event.
+* Added SimpleFormAction: an action that allows you to mimic the exact behaviour of the
+  SimpleFormController in a flow.
+* Added BirthDate sample application demonstrating the use of the SimpleFormAction.
+* Added Maven project.xml POM.
+
+Version 0.8.0 (26/02/2005)
+--------------------------
+* Incorporated input from Steven Bazyl:
+  - Refactored WebFlowCleanupFilter to ease subclassing. 
+  - Added a method to WebFlowMementoStack returning the stack as a list that an action can expose
+    to the view. Useful for certain things like breadcrumbs.
+* Added readme.txt to distribution.
+* Refactored WebFlowController so that there is no longer a 1-1 link between a controller and a
+  top level flow. You can now specify the flow the WebFlowController should start using the
+  "_flowName" request parameter. Consult the WebFlowController JavaDoc for details.
+  NB: If you subclassed the WebFlowController, make sure to review your code because the signatures
+  of some protected methods changed!
+* Changed SimpleWebFlow so that it no longer exposes the actual flow model map in the ModelAndView
+  objects it creates. Instead it uses the addAllObjects() method to expose the contents of the
+  flow model.
+
+Version 0.7.0 (17/12/2004)
+--------------------------
+* Added FileUpload sample application.
+* Improved BindAndValidateCommandAction: it now supports a "reuseCommand" property to indicate
+  that an existing instance of the command object in the flow model should be reused.
+* Restructured distribution archive a bit.
+
+Version 0.6.0 (19/11/2004)
+--------------------------
+* Several JavaDoc improvements.
+* Builds now include debug attributes.
+* The web flow controller now supports pluggable parameter extractors implementing the interface
+  ParameterExtractor, 2 standard implementations are provided: RequestParameterValueParameterExtractor
+  (the default) and RequestParameterNameParameterExtractor
+* There is now a WebFlow interface, and the basic implementation of this interface is provided by
+  the SimpleWebFlow class (which used to be called 'WebFlow'). This was done to allow other web flow
+  implementations to be plugged into the controller. It also eases AOP proxying. Note that you
+  will have to change your Spring bean definitions: change references to the 'WebFlow' class to
+  use the new 'SimpleWebFlow' class which does exactly the same thing.
+* Introduced NavigationException: a specialized web flow exception that is thrown when a web flow
+  encounters a navigation problem.
+* Added SubFlowBackNavigationExceptionResolver, which can try to resolve navigation problems with
+  sub flows resulting from use of the browser 'Back' button.
+* DTD validation is now forced while loading the web flow XML files.
+* Added WebFlowCleanupFilter, a servlet 2.3 filter that will cleanup all expired web flows in an
+  HTTP session.
+* Added WebFlowUtils class with general purpose utility methods. This class also provides token handling
+  similar to that in Struts to prevent double submits.
+* The web flow controller now verifies the availability and validity of its web flow bean on initialisation.
+* The flow id is now always available in the flow model so that actions can make use of it.
+* Added ItemList sample application to demonstrate double submit handling and flow expiry.
+
+Version 0.5.2 (02/11/2004)
+--------------------------
+* Added this change log.
+* Recompiled everything with Java 1.4.2 to avoid UnsupportedClassVersionError.
+* Applied BSD style license: see license.txt.
+
+Version 0.5.1 (01/11/2004)
+--------------------------
+* First public release.

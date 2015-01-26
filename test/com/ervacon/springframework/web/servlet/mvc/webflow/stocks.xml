@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	
+	<!-- Search Stock Flow -->
+	
+	<bean id="searchStockFlow" class="com.ervacon.springframework.web.servlet.mvc.webflow.SimpleWebFlow">
+		<property name="webFlowResource"><value>classpath:com/ervacon/springframework/web/servlet/mvc/webflow/searchStock-flow.xml</value></property>
+	</bean>
+
+	<bean id="bindCriteriaAction" class="com.ervacon.springframework.web.servlet.mvc.webflow.TestAction">
+		<property name="event"><value>ok</value></property>
+		<property name="modelDataName"><value>searchCriteria</value></property>
+	</bean>
+
+	<bean id="validateCriteriaAction" class="com.ervacon.springframework.web.servlet.mvc.webflow.TestAction">
+		<property name="event"><value>ok</value></property>
+	</bean>
+	
+	<bean id="searchAction" class="com.ervacon.springframework.web.servlet.mvc.webflow.TestAction">
+		<property name="event"><value>ok</value></property>
+		<property name="modelDataName"><value>searchResults</value></property>
+	</bean>
+	
+	<bean id="bindSelectionAction" class="com.ervacon.springframework.web.servlet.mvc.webflow.TestAction">
+		<property name="event"><value>ok</value></property>
+		<property name="modelDataName"><value>selectedStock</value></property>		
+	</bean>
+	
+	<bean id="stockDetailModelMapper" class="com.ervacon.springframework.web.servlet.mvc.webflow.ParameterizableModelMapper">
+		<property name="toMappingsList">
+			<list>
+				<value>selectedStock</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Stock Detail Flow -->
+
+	<bean id="stockDetailFlow" class="com.ervacon.springframework.web.servlet.mvc.webflow.SimpleWebFlow">
+		<property name="webFlowResource"><value>classpath:com/ervacon/springframework/web/servlet/mvc/webflow/stockDetail-flow.xml</value></property>
+	</bean>
+
+	<bean id="getDetailAction" class="com.ervacon.springframework.web.servlet.mvc.webflow.TestAction">
+		<property name="event"><value>ok</value></property>
+		<property name="modelDataName"><value>detailData</value></property>
+	</bean>
+
+</beans>

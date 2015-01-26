@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix"><value>/WEB-INF/jsp/</value></property>
+		<property name="suffix"><value>.jsp</value></property>
+	</bean>
+	
+	<!-- search flow -->
+
+	<bean id="search" name="/search" class="com.ervacon.springframework.web.servlet.mvc.webflow.WebFlowController">
+		<property name="webFlowName"><value>searchFlow</value></property>
+	</bean>
+	
+	<bean id="searchFlow" class="com.ervacon.springframework.web.servlet.mvc.webflow.SimpleWebFlow">
+		<property name="webFlowResource"><value>/WEB-INF/search-flow.xml</value></property>
+	</bean>
+
+	<bean id="bindAndValidateCriteriaAction" class="com.ervacon.springframework.web.servlet.mvc.webflow.BindAndValidateCommandAction">
+		<property name="commandName"><value>query</value></property>
+		<property name="commandClass"><value>com.ervacon.springframework.samples.phonebook.domain.PhoneBookQuery</value></property>
+		<property name="validator"><ref bean="queryValidator"/></property>
+	</bean>
+
+	<bean id="queryValidator" class="com.ervacon.springframework.samples.phonebook.web.PhoneBookQueryValidator">
+	</bean>
+	
+	<bean id="queryAction" class="com.ervacon.springframework.samples.phonebook.web.QueryAction">
+		<property name="phoneBook"><ref bean="phoneBook"/></property>
+	</bean>
+
+	<bean id="bindAndValidateIdAction" class="com.ervacon.springframework.web.servlet.mvc.webflow.BindAndValidateCommandAction">
+		<property name="commandName"><value>id</value></property>
+		<property name="commandClass"><value>com.ervacon.springframework.samples.phonebook.domain.UserId</value></property>
+	</bean>
+
+	<bean id="idMapper" class="com.ervacon.springframework.web.servlet.mvc.webflow.ParameterizableModelMapper">
+		<property name="toMappingsList">
+			<list>
+				<value>id</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- detail flow -->
+
+	<bean id="detail" name="/detail" class="com.ervacon.springframework.web.servlet.mvc.webflow.WebFlowController">
+		<property name="webFlowName"><value>detailFlow</value></property>
+	</bean>
+	
+	<bean id="detailFlow" class="com.ervacon.springframework.web.servlet.mvc.webflow.SimpleWebFlow">
+		<property name="webFlowResource"><value>/WEB-INF/detail-flow.xml</value></property>
+	</bean>
+
+	<bean id="getPersonAction" class="com.ervacon.springframework.samples.phonebook.web.GetPersonAction">
+		<property name="phoneBook"><ref bean="phoneBook"/></property>
+	</bean>
+
+	<bean id="bindAndValidateColleagueIdAction" class="com.ervacon.springframework.web.servlet.mvc.webflow.BindAndValidateCommandAction">
+		<property name="commandName"><value>colleagueId</value></property>
+		<property name="commandClass"><value>com.ervacon.springframework.samples.phonebook.domain.UserId</value></property>
+	</bean>
+
+	<bean id="colleagueIdMapper" class="com.ervacon.springframework.web.servlet.mvc.webflow.ParameterizableModelMapper">
+		<property name="toMappingsMap">
+			<map>
+				<entry key="colleagueId"><value>id</value></entry>
+			</map>
+		</property>
+	</bean>
+	
+</beans>

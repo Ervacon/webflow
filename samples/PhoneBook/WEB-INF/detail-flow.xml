@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-flow PUBLIC "-//ERVACON//DTD SPRING WEB FLOW//EN" "http://www.ervacon.com/dtd/web-flow.dtd">
+
+<web-flow name="Detail Flow">
+
+	<start-state state="getDetail"/>
+	
+	<action-state id="getDetail">
+		<action name="getDetailAct" bean="getPersonAction"/>
+		<transition name="getDetailAct.ok" to="detail"/>
+		<transition name="getDetailAct.error" to="endError"/>
+	</action-state>
+
+	<view-state id="detail" view="detail">
+		<transition name="back" to="endOk"/>
+		<transition name="colleagueDetail" to="bindAndValidateColleagueId"/>
+	</view-state>
+
+	<action-state id="bindAndValidateColleagueId">
+		<action name="bindAndValidateAct" bean="bindAndValidateColleagueIdAction"/>
+		<transition name="bindAndValidateAct.ok" to="colleagueDetail"/>
+		<transition name="bindAndValidateAct.error" to="endError"/>
+	</action-state>
+	
+	<flow-state id="colleagueDetail" flow="detailFlow" model-mapper="colleagueIdMapper">
+		<transition name="endOk" to="detail"/>
+		<transition name="endError" to="endError"/>
+	</flow-state>
+	
+	<end-state id="endOk"/>
+	<end-state id="endError" view="error"/>
+	
+</web-flow>

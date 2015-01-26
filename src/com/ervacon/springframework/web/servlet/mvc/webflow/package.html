@@ -1,0 +1,58 @@
+<body>
+	<p>
+		Controller implementation for the Spring web MVC framework that handles
+		requests using a <i>web flow</i>. For a detailed discussion of how you can
+		use this controller, read
+		<a href="http://www.ervacon.com/products/springwebflow/article">Spring Web Flows: A Practical Guide</a>.
+	</p>
+	
+	<p>
+		The central client API is provided by the following classes and interfaces:
+		<ul>
+			<li><a href="WebFlowController.html">WebFlowController</a></li>
+			<li><a href="Action.html">Action</a></li>
+			<li><a href="MultiAction.html">MultiAction</a></li>
+			<li><a href="BindAndValidateCommandAction.html">BindAndValidateCommandAction</a></li>
+			<li><a href="SimpleFormAction.html">SimpleFormAction</a></li>
+			<li><a href="ModelMapper.html">ModelMapper</a></li>
+			<li><a href="ParameterizableModelMapper.html">ParameterizableModelMapper</a></li>
+			<li><a href="WebFlowUtils.html">WebFlowUtils</a></li>
+		</ul>
+	</p>
+	
+	<p>
+		Web flows are defined in XML files that use the web flow DTD and should thus include
+		the following doctype definition:
+		<pre>&lt;!DOCTYPE web-flow PUBLIC "-//ERVACON//DTD SPRING WEB FLOW//EN" "http://www.ervacon.com/dtd/web-flow.dtd"&gt;</pre>
+		Consult the <a href="http://www.ervacon.com/dtd/web-flow.dtd">web-flow.dtd</a> for
+		an exact description of the syntax. The following is an example of a web flow definition
+		for a flow that is roughly equivalent to that implemented by the SimpleFormController:
+		<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE web-flow PUBLIC "-//ERVACON//DTD SPRING WEB FLOW//EN" "http://www.ervacon.com/dtd/web-flow.dtd"&gt;
+
+&lt;web-flow name="Simple Form Flow"&gt;
+	&lt;start-state state="form"/&gt;
+
+	&lt;view-state id="form" view="form"&gt;
+		&lt;transition name="submit" to="bindAndValidate"/&gt;
+	&lt;/view-state&gt;
+
+	&lt;action-state id="bindAndValidate"&gt;
+		&lt;action name="bindAndValidateAct" bean="bindAndValidateAction"/&gt;
+		&lt;transition name="bindAndValidateAct.ok" to="doSubmit"/&gt;
+		&lt;transition name="bindAndValidateAct.error" to="form"/&gt;
+	&lt;/action-state&gt;
+
+	&lt;action-state id="doSubmit"&gt;
+		&lt;action name="doSubmitAct" bean="doSubmitAction"/&gt;
+		&lt;transition name="doSubmitAct.ok" to="success"/&gt;
+		&lt;transition name="doSubmitAct.error" to="endError"/&gt;
+	&lt;/action-state&gt;
+
+	&lt;view-state id="success" view="success"/&gt;
+
+	&lt;end-state id="endError"/&gt;
+&lt;/web-flow&gt;</pre>
+	</p>
+</body>

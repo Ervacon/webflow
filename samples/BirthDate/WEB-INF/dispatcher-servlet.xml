@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix"><value>/WEB-INF/jsp/</value></property>
+		<property name="suffix"><value>.jsp</value></property>
+	</bean>
+
+	<bean id="birthDate" name="/birthDate.do" class="com.ervacon.springframework.web.servlet.mvc.webflow.WebFlowController">
+		<property name="webFlowName"><idref local="birthDateFlow"/></property>
+	</bean>
+	
+	<bean id="birthDateFlow" class="com.ervacon.springframework.web.servlet.mvc.webflow.SimpleWebFlow">
+		<property name="webFlowResource"><value>/WEB-INF/birthDate-flow.xml</value></property>
+	</bean>
+	
+	<bean id="birthDateFormAction" class="com.ervacon.springframework.samples.birthdate.web.BirthDateFormAction"/>
+	
+</beans>

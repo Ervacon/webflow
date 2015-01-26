@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix"><value>/WEB-INF/jsp/</value></property>
+		<property name="suffix"><value>.jsp</value></property>
+	</bean>
+	
+	<!-- 
+		support for multipart requests using commons file upload, make sure you have the fileupload jar
+	    in your classpath
+	-->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+	<bean id="upload" name="/upload" class="com.ervacon.springframework.web.servlet.mvc.webflow.WebFlowController">
+		<property name="webFlowName"><idref local="uploadFlow"/></property>
+	</bean>
+	
+	<bean id="uploadFlow" class="com.ervacon.springframework.web.servlet.mvc.webflow.SimpleWebFlow">
+		<property name="webFlowResource"><value>/WEB-INF/upload-flow.xml</value></property>
+	</bean>
+	
+	<bean id="processUploadAction" class="com.ervacon.springframework.samples.fileupload.web.ProcessUploadAction">
+		<property name="commandName"><value>file</value></property>
+		<property name="commandClass"><value>com.ervacon.springframework.samples.fileupload.web.FileUploadBean</value></property>
+	</bean>
+	
+</beans>

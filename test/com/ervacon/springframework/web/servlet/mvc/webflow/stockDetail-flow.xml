@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-flow PUBLIC "-//ERVACON//DTD SPRING WEB FLOW//EN" "http://www.ervacon.com/dtd/web-flow.dtd">
+
+<web-flow name="Stock Detail Flow">
+	
+	<start-state state="doGetDetail"/>
+
+	<action-state id="doGetDetail">
+		<action name="getDetailAct" bean="getDetailAction"/>
+		<transition name="getDetailAct.ok" to="detail"/>
+		<transition name="getDetailAct.error" to="endError"/>
+	</action-state>
+	
+	<view-state id="detail" view="detail">
+		<transition name="back" to="endOk"/>
+	</view-state>
+	
+	<end-state id="endOk"/>
+	<end-state id="endError" view="error"/>
+	
+</web-flow>
